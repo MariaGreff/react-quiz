@@ -1,3 +1,4 @@
+import AnswersList from "../AnswersList/AnswersList";
 import classes from "./ActiveQuiz.module.scss";
 
 function ActiveQuiz (props) {
@@ -10,10 +11,9 @@ function ActiveQuiz (props) {
         </span>
         <small>4 out of 12</small>
       </p>
-      <ul>
-        <li>good</li>
-        <li>bad</li>
-      </ul>
+     <AnswersList
+       answers={props.answers}
+     />
     </div>
   );
 };
