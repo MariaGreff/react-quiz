@@ -35,6 +35,12 @@ function Quiz () {
   );
 
   const onAnswerClickHandler = answerId => {
+    if (quiz.answerState) {
+      const key = Object.keys(quiz.answerState)[0];
+      if (quiz.answerState[key] === 'success') {
+        return;
+      }
+    }
     const question = quiz.questions[quiz.activeQuestion];
     if (question.rightAnswerId === answerId) {
       setQuiz( prevState => {
