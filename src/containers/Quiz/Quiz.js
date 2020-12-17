@@ -1,10 +1,12 @@
 import { useState } from "react";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
+import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 import classes from "./Quiz.module.scss";
 
 function Quiz () {
   const [quiz, setQuiz] = useState(
     {
+      isFinished: true,
       activeQuestion: 0,
       answerState: null,
       questions: [
@@ -51,7 +53,9 @@ function Quiz () {
 
       const timeout = window.setTimeout(() => {
         if (isQuizFinished()) {
-          console.log('Finished');
+          setQuiz( prevState => {
+            return { ...prevState, isFinished: true }
+          });
         } else {
           setQuiz( prevState => {
             return { ...prevState, activeQuestion: quiz.activeQuestion + 1, answerState: null };
@@ -73,7 +77,9 @@ function Quiz () {
     <div className={classes["Quiz"]}>
       <div className={classes["QuizWrapper"]}>
        <h1>Answer all questions</h1>
-       <ActiveQuiz
+       {
+         quiz.isFinished ? <FinishedQuiz /> :        
+         <ActiveQuiz
          question={quiz.questions[quiz.activeQuestion
          ].question}
          answers={quiz.questions[quiz.activeQuestion
@@ -83,6 +89,7 @@ function Quiz () {
          questionNumber={quiz.activeQuestion + 1}
          answerState={quiz.answerState}
        />
+       }
       </div>
     </div>
   )
