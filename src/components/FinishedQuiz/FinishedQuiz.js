@@ -4,7 +4,22 @@ function FinishedQuiz (props) {
   return (
     <div className={classes["FinishedQuiz"]}>
       <ul>
-        <li>
+      {props.quiz.map((question, index) => {
+        const cls = [
+          'fa',
+          props.results[question.id] === 'error' ? 'fa-times' : 'fa-check',
+          classes[`${props.results[question.id]}`] 
+        ];
+        console.log(props.results);
+        return (
+          <li key={index}>
+            <strong>{index+1}</strong>. 
+            {question.question}
+            <i className={cls.join(' ')}/>
+          </li>
+        )
+      })}
+        {/* <li>
           <strong>1. </strong>
           How are you? 
           <i className={'fa fa-times ' + classes["error"]} />
@@ -13,7 +28,7 @@ function FinishedQuiz (props) {
           <strong>2. </strong>
           How are you? 
           <i className={'fa fa-check ' + classes["success"]} />
-        </li>
+        </li> */}
       </ul>
       <p>4 out of 10</p>
       <div>
