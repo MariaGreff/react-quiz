@@ -1,3 +1,4 @@
+import Button from '../Ui/Button/Button';
 import classes from './FinishedQuiz.module.scss';
 
 function FinishedQuiz (props) {
@@ -29,7 +30,8 @@ const successCount = Object.keys(props.results).reduce((total, key) => {
       </ul>
       <p>Correct answers: {successCount} out of {props.questions.length}</p>
       <div>
-        <button onClick={props.onRetry}>Repeat</button>
+        <Button onClick={props.onRetry} type="primary">Retry</Button>
+        <Button type="success">All tests</Button>
       </div>
     </div>
   )
