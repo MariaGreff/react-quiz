@@ -1,3 +1,4 @@
+import Backdrop from "../../Ui/Backdrop/Backdrop";
 import classes from "./Drawer.module.scss"
 
 const links = [
@@ -23,11 +24,16 @@ function Drawer (props) {
   };
 
   return (
+    <>
     <nav className={cls.join(" ")}>
       <ul>
         {renderLinks()}
       </ul>
     </nav>
+    {
+      props.isOpen ?  <Backdrop onClick={props.onClose}/> : null
+    }
+    </>
   )
 };
 

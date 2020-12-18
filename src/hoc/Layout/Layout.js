@@ -15,11 +15,18 @@ function Layout (props) {
     })
   };
 
+  const menuCloseHandler = () => {
+    setMenu({
+      menu: false
+    })
+  };
+
   return (
     <div className={classes['Layout']}>
 
       <Drawer
         isOpen={menu.menu}
+        onClose={menuCloseHandler}
       />
 
       <MenuToggle
