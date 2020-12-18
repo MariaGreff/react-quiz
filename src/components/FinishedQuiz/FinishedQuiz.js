@@ -29,7 +29,7 @@ const successCount = Object.keys(props.results).reduce((total, key) => {
       </ul>
       <p>Correct answers: {successCount} out of {props.questions.length}</p>
       <div>
-        <button>Repeat</button>
+        <button onClick={props.onRetry}>Repeat</button>
       </div>
     </div>
   )

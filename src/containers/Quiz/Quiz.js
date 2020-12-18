@@ -94,13 +94,30 @@ function Quiz () {
   };
 
   const isQuizFinished = () => quiz.activeQuestion + 1 === quiz.questions.length;
-  console.log(quiz);
+ 
+  const retryHandler = () => {
+    setQuiz(prevState => {
+      return {
+        ...prevState,
+        results: {}, 
+        isFinished: false,
+        activeQuestion: 0,
+        answerState: null,
+      }
+    });
+  };
+
   return (
     <div className={classes["Quiz"]}>
       <div className={classes["QuizWrapper"]}>
        <h1>Answer all questions</h1>
        {
-         quiz.isFinished ? <FinishedQuiz results={quiz.results} questions={quiz.questions} /> :        
+         quiz.isFinished ? <FinishedQuiz 
+         results={quiz.results} 
+         questions={quiz.questions} 
+         onRetry={retryHandler} 
+
+         /> :        
          <ActiveQuiz
          question={quiz.questions[quiz.activeQuestion
          ].question}
