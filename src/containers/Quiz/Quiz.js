@@ -47,7 +47,7 @@ function Quiz () {
     }
     const results = quiz.results;
     const question = quiz.questions[quiz.activeQuestion];
-    
+
     if (question.rightAnswerId === answerId) {
       if (!results[question.id]) {
         results[question.id] = 'success';
@@ -100,7 +100,7 @@ function Quiz () {
       <div className={classes["QuizWrapper"]}>
        <h1>Answer all questions</h1>
        {
-         quiz.isFinished ? <FinishedQuiz results={quiz.results} quiz={quiz.questions} /> :        
+         quiz.isFinished ? <FinishedQuiz results={quiz.results} questions={quiz.questions} /> :        
          <ActiveQuiz
          question={quiz.questions[quiz.activeQuestion
          ].question}

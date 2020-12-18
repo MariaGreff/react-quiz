@@ -1,10 +1,17 @@
 import classes from './FinishedQuiz.module.scss';
 
 function FinishedQuiz (props) {
+const successCount = Object.keys(props.results).reduce((total, key) => {
+  if (props.results[key] === 'success') {
+    total++;
+  }
+  return total;
+}, 0)
+
   return (
     <div className={classes["FinishedQuiz"]}>
       <ul>
-      {props.quiz.map((question, index) => {
+      {props.questions.map((question, index) => {
         const cls = [
           'fa',
           props.results[question.id] === 'error' ? 'fa-times' : 'fa-check',
@@ -19,18 +26,8 @@ function FinishedQuiz (props) {
           </li>
         )
       })}
-        {/* <li>
-          <strong>1. </strong>
-          How are you? 
-          <i className={'fa fa-times ' + classes["error"]} />
-        </li>
-        <li>
-          <strong>2. </strong>
-          How are you? 
-          <i className={'fa fa-check ' + classes["success"]} />
-        </li> */}
       </ul>
-      <p>4 out of 10</p>
+      <p>Correct answers: {successCount} out of {props.questions.length}</p>
       <div>
         <button>Repeat</button>
       </div>
