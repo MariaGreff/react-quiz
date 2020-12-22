@@ -3,7 +3,7 @@ import Backdrop from "../../Ui/Backdrop/Backdrop";
 import classes from "./Drawer.module.scss"
 
 const links = [
-  {to: '/', label: 'List', exact: true},
+  {to: '/', label: 'List of quizzes', exact: true},
   {to: '/auth', label: 'Authorization', exact: false},
   {to: '/quiz-creator', label: 'Create quiz', exact: false},
 ]
