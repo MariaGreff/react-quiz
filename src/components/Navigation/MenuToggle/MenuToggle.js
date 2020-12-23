@@ -12,7 +12,6 @@ function MenuToggle (props) {
   } else {
     cls.push('fa-bars');
   }
-  console.log(props);
   return (
     <i 
       className={cls.join(' ')}

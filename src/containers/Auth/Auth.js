@@ -3,6 +3,12 @@ import Button from "../../components/Ui/Button/Button";
 import Input from "../../components/Ui/Input/Input";
 import classes from "./Auth.module.scss";
 
+function validateEmail(email) 
+    {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
 function Auth () {
 
   const [state, setState] = useState({
@@ -46,8 +52,42 @@ function Auth () {
     event.preventDefault();
   };
 
+  function  validateControl(value, validation) {
+    if (!validation) {
+      return true;
+    }
+
+    let isValid = true;
+
+    if (validation.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+
+    if (validation.email) {
+      isValid = validateEmail(value) && isValid;
+    }
+
+    if (validation.minLength) {
+      isValid = value.length >= validation.minLength && isValid;
+    }
+
+    return isValid;
+  };
+
   const onChangeHandler = (event, controlName) => {
-    console.log(controlName, event);
+    const formControls = {...state.formControls};
+    const control = {...formControls[controlName]};
+
+    control.value = event.target.value;
+    control.touched = true;
+    control.valid = validateControl(control.value, control.validation);
+
+    formControls[controlName] = control;
+
+    setState({
+      formControls
+    });
+
   };
 
   const renderInputs = () => {

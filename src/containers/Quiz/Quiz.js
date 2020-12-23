@@ -40,7 +40,6 @@ function Quiz () {
   const onAnswerClickHandler = answerId => {
     if (quiz.answerState) {
       const key = Object.keys(quiz.answerState)[0];
-      console.log(key);
       if (quiz.answerState[key] === 'success' ) {
         return;
       }

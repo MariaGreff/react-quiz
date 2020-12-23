@@ -19,7 +19,6 @@ const successCount = Object.keys(props.results).reduce((total, key) => {
           props.results[question.id] === 'error' ? 'fa-times' : 'fa-check',
           classes[`${props.results[question.id]}`] 
         ];
-        console.log(props.results);
         return (
           <li key={index}>
             <strong>{index+1}</strong>. 
