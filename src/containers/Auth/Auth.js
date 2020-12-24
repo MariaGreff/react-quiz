@@ -3,15 +3,15 @@ import Button from "../../components/Ui/Button/Button";
 import Input from "../../components/Ui/Input/Input";
 import classes from "./Auth.module.scss";
 
-function validateEmail(email) 
-    {
+function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
-    }
+       };
 
 function Auth () {
 
   const [state, setState] = useState({
+    isFormValid: true,
     formControls: {
       email: {
         value: '',
@@ -52,7 +52,7 @@ function Auth () {
     event.preventDefault();
   };
 
-  function  validateControl(value, validation) {
+  function validateControl(value, validation) {
     if (!validation) {
       return true;
     }
@@ -70,6 +70,7 @@ function Auth () {
     if (validation.minLength) {
       isValid = value.length >= validation.minLength && isValid;
     }
+    console.log(isValid);
 
     return isValid;
   };
@@ -84,9 +85,18 @@ function Auth () {
 
     formControls[controlName] = control;
 
-    setState({
-      formControls
+    let isFormValid = true;
+
+    Object.keys(formControls).forEach( name => {
+      isFormValid = formControls[name].valid;
     });
+
+    setState({
+      formControls,
+      isFormValid
+    });
+
+    console.log(formControls);
 
   };
 
@@ -98,7 +108,7 @@ function Auth () {
           key={controlName + index}
           type={control.type}
           value={control.value}
-          valid={control.value}
+          valid={control.valid}
           touched={control.touched}
           label={control.label}
           shouldValidate={!!control.validation}
@@ -121,11 +131,13 @@ function Auth () {
           <Button
             type="success"
             onClick={loginHandler}
+            disabled={!state.isFormValid}
           >
           Log In</Button>
           <Button
             type="primary"
             onClick={registerHandler}
+            disabled={!state.isFormValid}
           >Sign In</Button>
         </form>
       </div>

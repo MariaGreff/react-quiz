@@ -23,7 +23,7 @@ function Input (props) {
         onChange ={props.onChange}
        />
        {
-         isInvalid(props) ? <span>{props.errMessage || 'Check your email or password'}</span> : null
+         isInvalid(props) ? <span>{props.errorMessage || 'Check your email or password'}</span> : null
        }
     </div>
   )
